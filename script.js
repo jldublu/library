@@ -1,4 +1,4 @@
-let myLibrary = [new Book('Title1', 'Author1', 100), new Book('Title2', 'Author2', 101)];
+let myLibrary = JSON.parse(localStorage.getItem('myLibrary'));
 const bookContainer = document.querySelector('.book-container');
 
 window.onload = displayAllBooks();
@@ -12,11 +12,12 @@ function Book(title, author, pages) {
 
 function addBookToLibrary() {
   let title = document.querySelector('input[name=title]').value;
-  let author = '';
-  let pages = '';
+  let author = document.querySelector('input[name=author]').value;
+  let pages = document.querySelector('input[name=pages]').value;
   let book = new Book(title, author, pages);
 
   myLibrary.push(book);
+  populateStorage();
   displayBook(book);
 }
 
@@ -46,4 +47,8 @@ function displayAllBooks() {
   myLibrary.forEach(book => {
     displayBook(book);
   });
+}
+
+function populateStorage() {
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
 }

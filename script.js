@@ -1,4 +1,4 @@
-let myLibrary = JSON.parse(localStorage.getItem('myLibrary'));
+let myLibrary = getLibraryFromStorage();
 const bookContainer = document.querySelector('.book-container');
 
 window.onload = displayAllBooks();
@@ -47,6 +47,15 @@ function displayAllBooks() {
   myLibrary.forEach(book => {
     displayBook(book);
   });
+}
+
+function getLibraryFromStorage() {
+  let array = [];
+  if (localStorage.getItem('myLibrary') !== null) {
+    return JSON.parse(localStorage.getItem('myLibrary'));
+  }
+
+  return array;
 }
 
 function populateStorage() {

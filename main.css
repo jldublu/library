@@ -1,0 +1,7 @@
+.book-container {
+  display: flexbox;
+}
+
+.book {
+  border: 1px solid black;
+}

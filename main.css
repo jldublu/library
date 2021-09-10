@@ -1,7 +1,10 @@
 .book-container {
-  display: flexbox;
+  display: flex;
 }
 
 .book {
   border: 1px solid black;
+  width: auto;
+  margin: 5px;
+  text-align: center;
 }

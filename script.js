@@ -25,6 +25,15 @@ window.onclick = function(event) {
   }
 }
 
+//delete book
+window.onclick = function(event) {
+  if (event.target.classList.contains('delete-book')) {
+    myLibrary.splice(event.target.dataset.index, 1);
+    populateStorage();
+    location.reload();
+  }
+}
+
 function Book(title, author, pages) {
   this.title = title;
   this.author = author;
@@ -47,19 +56,25 @@ function displayBook(book) {
   const titleP = document.createElement('p');
   const authorP = document.createElement('p');
   const pagesP = document.createElement('p');
+  const deleteButton = document.createElement('button');
 
   bookDiv.classList.add('book');
   titleP.classList.add('title');
   authorP.classList.add('author');
   pagesP.classList.add('pages');
+  deleteButton.classList.add('delete-book');
 
   titleP.textContent = book.title;
   authorP.textContent = `By: ${book.author}`;
   pagesP.textContent = `Length: ${book.pages} pages`;
+  deleteButton.textContent = 'Remove From Library'
+
+  deleteButton.setAttribute('data-index', myLibrary.indexOf(book));
 
   bookDiv.appendChild(titleP);
   bookDiv.appendChild(authorP);
   bookDiv.appendChild(pagesP);
+  bookDiv.appendChild(deleteButton);
 
   bookContainer.appendChild(bookDiv);
 }

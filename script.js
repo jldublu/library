@@ -8,6 +8,8 @@ let modal = document.querySelector('.modal');
 let newBookButton = document.querySelector('button[name=new-book]');
 let closeModal = document.querySelector('.close');
 
+let readButton = document.querySelector('.read');
+
 //open modal
 newBookButton.onclick = function() {
   modal.style.display = 'block';
@@ -34,17 +36,29 @@ window.onclick = function(event) {
   }
 }
 
-function Book(title, author, pages) {
+//toggle read status
+document.onclick = function(event) {
+  if (event.target.classList.contains('read')) {
+    const index = event.target.dataset.index;
+    myLibrary[index].hasRead = !myLibrary[index].hasRead;
+    populateStorage();
+    location.reload();
+  }
+}
+
+function Book(title, author, pages, hasRead) {
   this.title = title;
   this.author = author;
   this.pages = pages;
+  this.hasRead = hasRead;
 }
 
 function addBookToLibrary() {
   let title = document.querySelector('input[name=title]').value;
   let author = document.querySelector('input[name=author]').value;
   let pages = document.querySelector('input[name=pages]').value;
-  let book = new Book(title, author, pages);
+  let hasRead = document.querySelector('input[name=read]').checked;
+  let book = new Book(title, author, pages, hasRead);
 
   myLibrary.push(book);
   populateStorage();
@@ -57,23 +71,28 @@ function displayBook(book) {
   const authorP = document.createElement('p');
   const pagesP = document.createElement('p');
   const deleteButton = document.createElement('button');
+  const readButton = document.createElement('button');
 
   bookDiv.classList.add('book');
   titleP.classList.add('title');
   authorP.classList.add('author');
   pagesP.classList.add('pages');
   deleteButton.classList.add('delete-book');
+  readButton.classList.add('read');
 
   titleP.textContent = book.title;
   authorP.textContent = `By: ${book.author}`;
   pagesP.textContent = `Length: ${book.pages} pages`;
-  deleteButton.textContent = 'Remove From Library'
+  deleteButton.textContent = 'Remove From Library';
+  readButton.textContent = book.hasRead ? 'Read' : 'Not Read';
 
   deleteButton.setAttribute('data-index', myLibrary.indexOf(book));
+  readButton.setAttribute('data-index', myLibrary.indexOf(book));
 
   bookDiv.appendChild(titleP);
   bookDiv.appendChild(authorP);
   bookDiv.appendChild(pagesP);
+  bookDiv.appendChild(readButton);
   bookDiv.appendChild(deleteButton);
 
   bookContainer.appendChild(bookDiv);

@@ -4,6 +4,27 @@ const bookContainer = document.querySelector('.book-container');
 window.onload = displayAllBooks();
 document.querySelector('.add-form').addEventListener('submit', addBookToLibrary);
 
+let modal = document.querySelector('.modal');
+let newBookButton = document.querySelector('button[name=new-book]');
+let closeModal = document.querySelector('.close');
+
+//open modal
+newBookButton.onclick = function() {
+  modal.style.display = 'block';
+}
+
+//close modal
+closeModal.onclick = function() {
+  modal.style.display = 'none';
+}
+
+//close modal 
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = 'none';
+  }
+}
+
 function Book(title, author, pages) {
   this.title = title;
   this.author = author;
@@ -34,7 +55,7 @@ function displayBook(book) {
 
   titleP.textContent = book.title;
   authorP.textContent = `By: ${book.author}`;
-  pagesP.textContent = `Length: ${book.pages}`;
+  pagesP.textContent = `Length: ${book.pages} pages`;
 
   bookDiv.appendChild(titleP);
   bookDiv.appendChild(authorP);

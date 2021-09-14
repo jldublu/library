@@ -7,17 +7,19 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-    <!-- button to bring up add book modal -->
-    <button name="new-book">Add New Book</button>
-
+    <header>
+      <h1>Library</h1>
+      <button name="new-book">Add New Book</button>
+    </header>
     <div class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
         <!-- form to add book -->
         <form class="add-form">
-          <label>Title: <input type="text" name="title" required></label>
-          <label>Author: <input type="text" name="author" required></label>
-          <label>Number of Pages: <input type="number" name="pages" required></label>
+          <h2>New Book</h2>
+          <label>Title <input type="text" name="title" required></label>
+          <label>Author <input type="text" name="author" required></label>
+          <label>Number of Pages <input type="number" name="pages" required></label>
           <label>Have you read this before? <input type="checkbox" name="read"></label>
           <button name="submit">Add</button>
         </form>
@@ -25,8 +27,9 @@
     </div>
     
     <!-- container to display books -->
-    <div class="book-container"></div>
-
+    <main>
+      <div class="book-container"></div>
+    </main>
     </div>
   </body>
 </html>

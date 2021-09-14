@@ -1,14 +1,13 @@
+'use strict'
 let myLibrary = getLibraryFromStorage();
 const bookContainer = document.querySelector('.book-container');
+const modal = document.querySelector('.modal');
+const newBookButton = document.querySelector('button[name=new-book]');
+const closeModal = document.querySelector('.close');
+const readButton = document.querySelector('.read');
 
 window.onload = displayAllBooks();
 document.querySelector('.add-form').addEventListener('submit', addBookToLibrary);
-
-let modal = document.querySelector('.modal');
-let newBookButton = document.querySelector('button[name=new-book]');
-let closeModal = document.querySelector('.close');
-
-let readButton = document.querySelector('.read');
 
 //open modal
 newBookButton.onclick = function() {

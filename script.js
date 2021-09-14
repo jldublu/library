@@ -39,8 +39,7 @@ window.onclick = function(event) {
 //toggle read status
 document.onclick = function(event) {
   if (event.target.classList.contains('read')) {
-    const index = event.target.dataset.index;
-    myLibrary[index].hasRead = !myLibrary[index].hasRead;
+    myLibrary[event.target.dataset.index].toggleHasRead();
     populateStorage();
     location.reload();
   }
@@ -51,6 +50,10 @@ function Book(title, author, pages, hasRead) {
   this.author = author;
   this.pages = pages;
   this.hasRead = hasRead;
+}
+
+Book.prototype.toggleHasRead = function() {
+  this.hasRead = !this.hasRead;
 }
 
 function addBookToLibrary() {
@@ -107,7 +110,10 @@ function displayAllBooks() {
 function getLibraryFromStorage() {
   let array = [];
   if (localStorage.getItem('myLibrary') !== null) {
-    return JSON.parse(localStorage.getItem('myLibrary'));
+    let storageArray = JSON.parse(localStorage.getItem('myLibrary'));
+    let returnArray = [];
+    storageArray.forEach(book => returnArray.push(new Book(book.title, book.author, book.pages, book.hasRead)));
+    return returnArray;
   }
 
   return array;

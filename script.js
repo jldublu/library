@@ -1,11 +1,24 @@
 'use strict'
-let myLibrary = getLibraryFromStorage();
 const bookContainer = document.querySelector('.book-container');
 const modal = document.querySelector('.modal');
 const newBookButton = document.querySelector('button[name=new-book]');
 const closeModal = document.querySelector('.close');
 const readButton = document.querySelector('.read');
 
+class Book {
+  constructor(title, author, pages, hasRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.hasRead = hasRead;
+  }
+
+  toggleHasRead() {
+    this.hasRead = !this.hasRead;
+  }
+}
+
+let myLibrary = getLibraryFromStorage();
 window.onload = displayAllBooks();
 document.querySelector('.add-form').addEventListener('submit', addBookToLibrary);
 
@@ -42,17 +55,6 @@ document.onclick = function(event) {
     populateStorage();
     location.reload();
   }
-}
-
-function Book(title, author, pages, hasRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.hasRead = hasRead;
-}
-
-Book.prototype.toggleHasRead = function() {
-  this.hasRead = !this.hasRead;
 }
 
 function addBookToLibrary() {
